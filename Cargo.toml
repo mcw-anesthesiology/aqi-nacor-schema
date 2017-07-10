@@ -1,0 +1,10 @@
+[package]
+authors = ["Jacob Mischka <jacob@mischka.me>"]
+name = "aqi-nacor-schema"
+version = "0.1.0"
+
+[dependencies]
+chrono = "0.4.0"
+lazy_static = "0.2.8"
+regex = "0.2.2"
+xml-rs = "0.6.0"
