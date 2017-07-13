@@ -3,7 +3,7 @@ authors = ["Jacob Mischka <jacob@mischka.me>"]
 name = "aqi-nacor-schema"
 description = "Rust structs that adhere to AQI's NACOR XML schema"
 repository = "https://github.com/jacobmischka/aqi-nacor-schema"
-version = "0.1.0"
+version = "0.2.0"
 license = "MIT"
 keywords = ["aqi", "nacor", "qcdr", "anesthesia", "anesthesiology"]
 
