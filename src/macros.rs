@@ -6,7 +6,7 @@ macro_rules! enum_map {
             ),*
         }
     ) => (
-        #[derive(Clone, Copy, Debug)]
+        #[derive(Clone, Copy, Debug, Hash, Eq, PartialEq)]
         pub enum $NAME {
             $($VARIANT,)*
         }
