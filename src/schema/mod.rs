@@ -1173,8 +1173,8 @@ enum_map! {
 	}
 }
 
-schema_pattern_type!(QCDRMeasureType, r"^(ASA[0-9][0-9])|(PQRS[0-9][0-9][0-9])$");
-schema_pattern_type!(QCDRCodeValueType, r"^(ASA[0-9][0-9][A-Z])|([0-9][0-9][0-9][0-9]F)|(G[0-9][0-9][0-9][0-9])$");
+schema_pattern_type!(QCDRMeasureType, r"^(AQI[0-9][0-9])|(PQRS[0-9][0-9][0-9])$");
+schema_pattern_type!(QCDRCodeValueType, r"^([0-9][0-9][0-9][0-9]F)|(G[0-9][0-9][0-9][0-9])$");
 
 enum_map! {
 	QCDRModifierType: SchemaStringType; value {
