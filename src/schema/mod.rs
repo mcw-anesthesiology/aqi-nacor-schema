@@ -33,8 +33,9 @@ pub struct RecordHeaderType {
 	pub practice_id: PracticeIdType,
 	pub created_by: String,
 	pub create_date: DateTime<Local>,
-	pub email_set: Option<EmailSetType>,
-	pub aqi_xml_version: AQIXMLVersionType
+	pub email_set: EmailSetType,
+	pub aqi_xml_version: AQIXMLVersionType,
+	pub vendor_set: Option<VendorSetType>
 }
 
 pub struct EmailSetType {

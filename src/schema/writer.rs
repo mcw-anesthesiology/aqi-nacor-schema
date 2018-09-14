@@ -43,11 +43,13 @@ impl WritableSchemaType for RecordHeaderType {
 		write_value("CreatedBy", &self.created_by, writer)?;
 		write_value("CreateDate", &self.create_date.to_rfc3339(), writer)?;
 
-		if let Some(ref email_set) = self.email_set {
-			email_set.write("EmailSet", writer)?;
-		}
+		self.email_set.write("EmailSet", writer)?;
 
 		write_value("AQIXMLVersion", &self.aqi_xml_version.value(), writer)?;
+
+		if let Some(ref vendor_set) = self.vendor_set {
+			vendor_set.write("VendorSet", writer)?;
+		}
 
 		writer.write(XmlEvent::end_element())?;
 
