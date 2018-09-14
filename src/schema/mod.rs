@@ -30,7 +30,7 @@ pub struct AnesthesiaRecordsType {
 }
 
 pub struct RecordHeaderType {
-	pub practice_id: u64,
+	pub practice_id: PracticeIdType,
 	pub created_by: String,
 	pub create_date: DateTime<Local>,
 	pub email_set: Option<EmailSetType>,
@@ -45,6 +45,20 @@ pub struct EmailNotificationSetType {
 	pub email_notification_first_name: String,
 	pub email_notification_last_name: String,
 	pub email_notification_address: EmailAddressType
+}
+
+pub struct VendorSetType {
+	pub vendor: Vec<Vendors>
+}
+
+pub struct Vendors {
+	pub vendor_id: Option<VendorIDType>,
+	pub vendor_set_type: SetVendorSetType,
+	pub vendor_name: String
+}
+
+pub struct SetVendorSetType {
+	pub vendor_type: Vec<TypeVendorType>
 }
 
 pub struct AnesthesiaRecordType {
@@ -169,7 +183,6 @@ pub struct PreOpType {
 	pub asa_class: ASAClassCodeType,
 	pub pre_anesth_status: Option<PreAnesthStatusCodeType>,
 	pub icd_set: Option<ICDSetType>,
-	pub pre_risk_set: Option<PreRiskSetType>,
 	pub pre_lab_set: Option<PreLabDataSetType>
 }
 
@@ -181,16 +194,6 @@ pub struct ICDType {
 	pub icd_rank: Option<u64>,
 	pub icd_value: ICDValueType,
 	pub icd_version: ICDVersionType
-}
-
-pub struct PreRiskSetType {
-	pub pre_risk: Vec<PreOPRiskType>
-}
-
-pub struct PreOPRiskType {
-	pub pre_op_risk_category: Option<PreOPRiskCategoryCodeType>,
-	pub pre_op_risk_name: PreOPRiskCodeType,
-	pub pre_op_risk_notes: Option<String>
 }
 
 pub struct PreLabDataSetType {
@@ -803,7 +806,8 @@ pub enum ICDValueType {
 	ICDValueType9CM(String),
 	ICDValueType10CM(String),
 	ICDValueType9SG(String),
-	ICDValueType10SG(String)
+	ICDValueType10SG(String),
+	NacorRegistryCodeType(String)
 }
 
 impl SchemaStringType for ICDValueType {
@@ -814,7 +818,8 @@ impl SchemaStringType for ICDValueType {
 			&ICDValueType9CM(ref x) => &x,
 			&ICDValueType10CM(ref x) => &x,
 			&ICDValueType9SG(ref x) => &x,
-			&ICDValueType10SG(ref x) => &x
+			&ICDValueType10SG(ref x) => &x,
+			&NacorRegistryCodeType(ref x) => &x
 		}
 	}
 }
@@ -828,6 +833,7 @@ impl SchemaRegexInput for ICDValueType {
 			static ref RE10CM: Regex = Regex::new(r"^[A-TV-Z][0-9][A-Z0-9](\.[A-Z0-9]{1,4})?$").unwrap();
 			static ref RE9SG: Regex = Regex::new(r"^\d{3,4}$").unwrap();
 			static ref RE10SG: Regex = Regex::new(r"^[a-zA-Z0-9]{7}$").unwrap();
+			static ref RENACOR: Regex = Regex::new(r"[0-9][0-9][a-zA-Z][0-9][0-9]").unwrap();
 		}
 
 		if RE9CM.is_match(val) {
@@ -846,6 +852,10 @@ impl SchemaRegexInput for ICDValueType {
 			return Ok(ICDValueType10SG(val.to_string()));
 		}
 
+		if RENACOR.is_match(val) {
+			return Ok(NacorRegistryCodeType(val.to_string()));
+		}
+
 		Err(AQIError::RegexError)
 	}
 }
@@ -856,55 +866,6 @@ enum_map! {
 		Ten => "10"
 	}
 }
-
-/// Examples provided in schema
-schema_string_tuple_struct!(PreOPRiskCategoryCodeType);
-// pub enum PreOPRiskCategoryCodeType {
-// 	Cardiovascular,
-// 	Endocrine,
-// 	Hemotological,
-// 	Immunology,
-// 	Metabolic,
-// 	Muscular,
-// 	Neuromuscular,
-// 	Respiratory,
-// 	Other,
-// 	Unknown,
-// 	AnyString(String)
-// }
-
-/// Examples provided in schema
-schema_string_tuple_struct!(PreOPRiskCodeType);
-// pub enum PreOPRiskCodeType {
-// 	AscitesWithin30Days,
-// 	BleedingDisorder,
-// 	ChemotherapyForCancerWithin30Days,
-// 	CongenitalAnomalies,
-// 	CongestiveHeartFailure,
-// 	CurrentSmoker,
-// 	CurrentlyRequiringOrOnDialysis,
-// 	CVAResidualNeurologicalDeficit,
-// 	DiabetesMellitus,
-// 	DisseminatedCancer,
-// 	DoNotResuscitateStatus,
-// 	EsophagealVarices,
-// 	FunctionallyDependentHealthStatus,
-// 	HistoryOfAnginaWithinPast1Month,
-// 	HistoryOfMyocardialInfarctionWithinPast6Months,
-// 	HistoryOfRevascularizationAmputationForPVD,
-// 	HypertensionRequiringMedication,
-// 	ImpairedSensorium,
-// 	Prematurity,
-// 	Obesity,
-// 	RespiratoryDisease,
-// 	SteroidUse,
-// 	Diabetes,
-// 	Hypertension,
-// 	Other,
-// 	Unknown,
-// 	None,
-// 	AnyString(String)
-// }
 
 /// Examples provided in schema
 schema_string_tuple_struct!(LabDataNameCodeType);
@@ -1173,7 +1134,7 @@ enum_map! {
 	}
 }
 
-schema_pattern_type!(QCDRMeasureType, r"^(AQI[0-9][0-9])|(PQRS[0-9][0-9][0-9])$");
+schema_pattern_type!(QCDRMeasureType, r"^(AQI[0-9][0-9])|(PQRS[0-9][0-9][0-9])|(IIM[0-9][0-9][0-9])|(Quantum[0-9][0-9])$");
 schema_pattern_type!(QCDRCodeValueType, r"^([0-9][0-9][0-9][0-9]F)|(G[0-9][0-9][0-9][0-9])$");
 
 enum_map! {
@@ -1188,11 +1149,19 @@ enum_map! {
 
 enum_map! {
 	AQIXMLVersionType: SchemaStringType; value {
-		Version2016V10 => "2016V1.0",
-		Version2017V10 => "2017V1.0"
+		Version2018V10 => "2018V1.0",
+		Version2018V10R => "2018V1.0R"
 	}
 }
 
+/// 1 = Billing
+/// 2 = Quality / Outcomes
+/// 3 = AIMS only
+/// 4 = EMR/EHR (with or without AIMS)
+type TypeVendorType = u8;
+
+schema_pattern_type!(PracticeIdType, r"^[0-9]{3-5}$");
+schema_pattern_type!(VendorIDType, r"^[0-9]{3}[A-Z]{2}[0-9]{2}$");
 schema_pattern_type!(EmailAddressType, r".+@.+\..+");
 schema_pattern_type!(ZipCodeType, r"^[0-9]{5}(-[0-9]{4})?$");
 schema_pattern_type!(TaxIdType, r"^[0-9]{9}$");
