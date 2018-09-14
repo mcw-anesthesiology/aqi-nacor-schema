@@ -309,7 +309,7 @@ impl WritableSchemaType for AnesthesiaCaseType {
 		}
 
 		if let Some(ref cpt_anes_set) = self.cpt_anes_set {
-			cpt_anes_set.write("CPTAnessSet", writer)?; // Sic
+			cpt_anes_set.write("CPTAnesSet", writer)?;
 		}
 
 		writer.write(XmlEvent::end_element())?;
@@ -477,7 +477,7 @@ impl WritableSchemaType for CPTAnesType {
 		write_value("CPTAnesValue", self.cpt_anes_value.value(), writer)?;
 
 		if let Some(ref cpt_anes_modifier) = self.cpt_anes_modifier {
-			write_value("CPTAnesModifer", cpt_anes_modifier.value(), writer)?; // Sic
+			write_value("CPTAnesModifier", cpt_anes_modifier.value(), writer)?;
 		}
 
 		if let Some(ref cpt_anes_description) = self.cpt_anes_description {
