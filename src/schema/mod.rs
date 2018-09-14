@@ -1161,9 +1161,9 @@ enum_map! {
 /// 4 = EMR/EHR (with or without AIMS)
 type TypeVendorType = u8;
 
-schema_pattern_type!(PracticeIdType, r"^[0-9]{3-5}$");
+schema_pattern_type!(PracticeIdType, r"^[0-9]{3,5}$");
 schema_pattern_type!(VendorIDType, r"^[0-9]{3}[A-Z]{2}[0-9]{2}$");
-schema_pattern_type!(EmailAddressType, r".+@.+\..+");
+schema_pattern_type!(EmailAddressType, r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 schema_pattern_type!(ZipCodeType, r"^[0-9]{5}(-[0-9]{4})?$");
 schema_pattern_type!(TaxIdType, r"^[0-9]{9}$");
 schema_pattern_type!(NPIType, r"^[0-9]{10}$");
