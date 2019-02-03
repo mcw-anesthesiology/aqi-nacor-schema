@@ -60,7 +60,10 @@ macro_rules! schema_pattern_type {
                 }
                 match RE.is_match(val) {
                     true => Ok($NAME(val.to_string())),
-                    _ => Err(AQIError::RegexError),
+                    _ => Err(AQIError::RegexError(format!(
+                        "Failed matching {}: {}",
+                        $REGEX, val
+                    ))),
                 }
             }
         }

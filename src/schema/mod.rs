@@ -859,7 +859,10 @@ impl SchemaRegexInput for ICDValueType {
             return Ok(NacorRegistryCodeType(val.to_string()));
         }
 
-        Err(AQIError::RegexError)
+        Err(AQIError::RegexError(format!(
+            "Failed matching ICDValueType: {}",
+            val
+        )))
     }
 }
 
