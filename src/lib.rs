@@ -8,5 +8,5 @@ pub mod schema;
 
 #[derive(Debug)]
 pub enum AQIError {
-	RegexError
+    RegexError,
 }
