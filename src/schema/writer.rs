@@ -6,7 +6,7 @@ use super::*;
 use std::fmt::Display;
 use std::io::Write;
 
-const DATE_TIME_FORMAT: &'static str = "%Y-%m-%dT%H:%M:%S%.f";
+const DATE_TIME_FORMAT: &'static str = "%Y-%m-%dT%H:%M:%S%.3f";
 
 fn write_value<T: Display, W: Write>(
     name: &str,
