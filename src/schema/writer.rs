@@ -21,7 +21,7 @@ fn write_value<T: Display, W: Write>(
 }
 
 pub trait WritableSchemaType {
-    fn write<W: Write>(&self, name: &str, &mut EventWriter<W>) -> Result<(), EmitterError>;
+    fn write<W: Write>(&self, name: &str, writer: &mut EventWriter<W>) -> Result<(), EmitterError>;
 }
 
 impl WritableSchemaType for AnesthesiaRecordsType {

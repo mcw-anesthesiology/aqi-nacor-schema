@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! enum_map {
 	(
         $NAME:ident: $TRAIT:ident; $FUNCTION:ident -> $TYPE:ty {
@@ -39,6 +40,7 @@ macro_rules! enum_map {
     );
 }
 
+#[macro_export]
 macro_rules! schema_pattern_type {
     (
 		$NAME:ident, $REGEX:expr
@@ -70,6 +72,7 @@ macro_rules! schema_pattern_type {
     };
 }
 
+#[macro_export]
 macro_rules! schema_string_tuple_struct {
     (
 		$NAME:ident

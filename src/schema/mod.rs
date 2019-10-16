@@ -1,12 +1,10 @@
 //! # Schema types
 //! Enumerate valid types in AQI Schema
 
-extern crate chrono;
-extern crate regex;
+use chrono::prelude::{NaiveDate, NaiveDateTime};
+use regex::Regex;
 
-use self::chrono::prelude::{NaiveDate, NaiveDateTime};
-use self::regex::Regex;
-use AQIError;
+use crate::AQIError;
 
 pub mod writer;
 
@@ -21,7 +19,7 @@ pub trait SchemaIntType {
 }
 
 pub trait SchemaRegexInput: Sized {
-    fn from_str(&str) -> Result<Self, AQIError>;
+    fn from_str(s: &str) -> Result<Self, AQIError>;
 }
 
 pub struct AnesthesiaRecordsType {
@@ -626,7 +624,7 @@ enum_map! {
         Podiatrist => "Podiatrist",
         RN => "Registered Nurse",
         Resident => "Resident (Anesthesia)",
-        SRNA => "Student Registered Nurse Anesthetist",
+        SRNA => "Student Registered Nurse Anesthetist"
     }
 }
 
@@ -1166,7 +1164,7 @@ enum_map! {
         Version2018V10 => "2018V1.0",
         Version2018V10R => "2018V1.0R",
         Version2019V10 => "2019V1.0",
-        Version2019V10R => "2019V1.0R",
+        Version2019V10R => "2019V1.0R"
     }
 }
 
