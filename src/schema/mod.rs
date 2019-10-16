@@ -618,13 +618,15 @@ enum_map! {
         CAA => "Certified Anesthesiologist Assistant",
         CRNA => "Certified Registered Nurse Anesthetist",
         Dentist => "Dentist or Oral Surgeon",
+        DentistAnesthesiologist => "Dentist Anesthesiologist",
+        DentistAnesthesiologistResident => "Dentist Anesthesiologist Resident",
         Fellow => "Fellow (Anesthesiology)",
         Surgeon => "Surgeon",
         PA => "Physician Assistant",
         Podiatrist => "Podiatrist",
         RN => "Registered Nurse",
         Resident => "Resident (Anesthesia)",
-        SRNA => "Student Registered Nurse Anesthetist"
+        SRNA => "Student Registered Nurse Anesthetist",
     }
 }
 
@@ -1052,7 +1054,9 @@ enum_map! {
         WrongPatient => 98,
         WrongProcedure => 99,
         WrongSiteRegionalAnesthesia => 100,
-        WrongSiteSurgery => 101
+        WrongSiteSurgery => 101,
+        InjuryRelatedToSensoryOrMotorDeficitAfterLocalOrRegionalAnesthesia => 102,
+        UnplannedElectricShock => 103
     }
 }
 
@@ -1160,7 +1164,9 @@ enum_map! {
 enum_map! {
     AQIXMLVersionType: SchemaStringType; value {
         Version2018V10 => "2018V1.0",
-        Version2018V10R => "2018V1.0R"
+        Version2018V10R => "2018V1.0R",
+        Version2019V10 => "2019V1.0",
+        Version2019V10R => "2019V1.0R",
     }
 }
 
