@@ -4,7 +4,7 @@ name = "aqi-nacor-schema"
 edition = "2018"
 description = "Rust structs that adhere to AQI's NACOR XML schema"
 repository = "https://github.com/jacobmischka/aqi-nacor-schema"
-version = "2.2.1"
+version = "2.3.0"
 license = "MIT"
 keywords = ["aqi", "nacor", "qcdr", "anesthesia", "anesthesiology"]
 
