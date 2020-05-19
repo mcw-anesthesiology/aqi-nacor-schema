@@ -1164,7 +1164,9 @@ enum_map! {
         Version2018V10 => "2018V1.0",
         Version2018V10R => "2018V1.0R",
         Version2019V10 => "2019V1.0",
-        Version2019V10R => "2019V1.0R"
+        Version2019V10R => "2019V1.0R",
+        Version2020V10 => "2020V1.0",
+        Version2020V10R => "2020V1.0R"
     }
 }
 
