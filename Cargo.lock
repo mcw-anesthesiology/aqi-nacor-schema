@@ -10,7 +10,7 @@ dependencies = [
 
 [[package]]
 name = "aqi-nacor-schema"
-version = "2.2.1"
+version = "2.3.0"
 dependencies = [
  "chrono 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.2.11 (registry+https://github.com/rust-lang/crates.io-index)",
